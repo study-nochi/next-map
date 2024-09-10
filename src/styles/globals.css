@@ -1,27 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.layout {
+  @apply pt-[52px];
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.navbar {
+  @apply flex justify-between items-center fixed w-full top-0 h-[52px] shadow-sm bg-white;
+}
+
+.navbar__logo {
+  @apply text-blue-800 text-lg font-semibold cursor-pointer px-[18px] py-0;
+}
+
+.navbar__list {
+  @apply flex gap-3 items-center px-[18px] py-0;
+}
+
+.navbar__button {
+  @apply hidden cursor-pointer;
+}
+
+.navbar__list--item {
+  @apply cursor-pointer;
+}
+.navbar__list--item:hover {
+  @apply text-blue-800;
+}
+
+@media (max-width: 600px) {
+  .navbar--mobile {
+    @apply fixed w-full top-[52px] bg-blue-800 text-white h-screen;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+  .navbar__list {
+    @apply hidden;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .navbar__button {
+    @apply block px-[18px] py-0 cursor-pointer;
+  }
+
+  .navbar__list--item--mobile {
+    @apply cursor-pointer;
+  }
+  .navbar__list--item--mobile:hover {
+    @apply text-blue-800;
+  }
+
+  .navbar__list--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: start;
+    padding: 24px 18px;
+
+    @apply flex flex-col gap-4 items-start px-[18px] py-6;
   }
 }
