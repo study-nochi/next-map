@@ -1,6 +1,7 @@
 /* global kakao */
 
 import Script from "next/script";
+import * as stores from "@/data/store_data.json";
 
 declare global {
   interface Window {
@@ -8,16 +9,39 @@ declare global {
   }
 }
 
+const DEFAULT_LAT = 37.566826;
+const DEFAULT_LNG = 126.9786567;
+
 export default function Map() {
   const loadKakaoMap = () => {
     // Kakao 지도 로드
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById("map");
       const mapOption = {
-        center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
+        center: new window.kakao.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG),
         level: 3,
       };
-      new window.kakao.maps.Map(mapContainer, mapOption);
+      const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+      // 식당 데이터 마커 띄우기
+      stores.DATA.map((store) => {
+        // 마커가 표시될 위치입니다
+        var markerPosition = new window.kakao.maps.LatLng(
+          store?.y_dnts,
+          store?.x_cnts
+        );
+
+        // 마커를 생성합니다
+        var marker = new window.kakao.maps.Marker({
+          position: markerPosition,
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
+
+        // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+        // marker.setMap(null);
+      });
     });
   };
   return (
