@@ -1,6 +1,8 @@
 /* global kakao */
 
 import Script from "next/script";
+import * as stores from "@/data/store_data.json";
+import { Dispatch, SetStateAction } from "react";
 
 declare global {
   interface Window {
@@ -8,16 +10,25 @@ declare global {
   }
 }
 
-export default function Map() {
+const DEFAULT_LAT = 37.566826;
+const DEFAULT_LNG = 126.9786567;
+
+interface MapProps {
+  setMap: Dispatch<SetStateAction<any>>;
+}
+
+export default function Map({ setMap }: MapProps) {
   const loadKakaoMap = () => {
     // Kakao 지도 로드
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById("map");
       const mapOption = {
-        center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
+        center: new window.kakao.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG),
         level: 3,
       };
-      new window.kakao.maps.Map(mapContainer, mapOption);
+      const map = new window.kakao.maps.Map(mapContainer, mapOption);
+
+      setMap(map);
     });
   };
   return (
