@@ -24,10 +24,7 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
             imageSize,
             imageOption
           ),
-          markerPosition = new window.kakao.maps.LatLng(
-            store?.lat,
-            store?.lng
-          ); // 마커가 표시될 위치입니다
+          markerPosition = new window.kakao.maps.LatLng(store?.lat, store?.lng); // 마커가 표시될 위치입니다
 
         // 마커를 생성합니다
         const marker = new window.kakao.maps.Marker({
