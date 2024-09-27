@@ -1,6 +1,6 @@
 export interface Root {
   DESCRIPTION: Description;
-  DATA: StoreType[];
+  DATA: DATA[];
 }
 
 export interface Description {
@@ -34,7 +34,7 @@ export interface Description {
   RDN_CODE_NM: string;
 }
 
-export interface StoreType {
+export interface DATA {
   tel_no?: string;
   crtfc_gbn: string;
   upd_time: number;
@@ -63,4 +63,16 @@ export interface StoreType {
   use_yn: string;
   crtfc_gbn_nm: string;
   food_menu: any;
+}
+
+export interface StoreType {
+  id: number;
+  phone?: string | null;
+  address?: string | null;
+  lat?: string | null;
+  lng?: string | null;
+  name?: string | null;
+  category?: string | null;
+  storeType?: string | null;
+  foodCertifyName?: string | null;
 }

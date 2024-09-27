@@ -7,10 +7,11 @@ import {
   AiOutlinePhone,
 } from "react-icons/ai";
 import { HiOutlineMapPin } from "react-icons/hi2";
+import { StoreType } from "@/interface";
 
 interface StoreBoxProps {
-  store: any;
-  setStore: Dispatch<SetStateAction<any>>;
+  store: StoreType | null;
+  setStore: Dispatch<SetStateAction<StoreType | null>>;
 }
 
 export default function StoreBox({ store, setStore }: StoreBoxProps) {
@@ -23,8 +24,8 @@ export default function StoreBox({ store, setStore }: StoreBoxProps) {
               <div className="flex gap-4 items-center">
                 <Image
                   src={`${
-                    store.bizcnd_code_nm
-                      ? `/images/markers/${store.bizcnd_code_nm}.png`
+                    store.category
+                      ? `/images/markers/${store.category}.png`
                       : "/images/markers/default.png"
                   }`}
                   width={40}
@@ -32,8 +33,8 @@ export default function StoreBox({ store, setStore }: StoreBoxProps) {
                   alt="아이콘 이미지"
                 />
                 <div>
-                  <div className="font-semibold">{store.upso_nm}</div>
-                  <div className="text-sm">{store.cob_code_nm ?? "미지정"}</div>
+                  <div className="font-semibold">{store.name}</div>
+                  <div className="text-sm">{store.storeType ?? "미지정"}</div>
                 </div>
               </div>
               <button type="button" onClick={() => setStore(null)}>
@@ -42,19 +43,19 @@ export default function StoreBox({ store, setStore }: StoreBoxProps) {
             </div>
             <div className="flex mt-4 gap-2 items-center">
               <HiOutlineMapPin />
-              {store.rdn_code_nm ?? "미지정"}
+              {store.address ?? "미지정"}
             </div>
             <div className="flex mt-2 gap-2 items-center">
               <AiOutlinePhone />
-              {store.tel_no ?? "미지정"}
+              {store.phone ?? "미지정"}
             </div>
             <div className="flex mt-2 gap-2 items-center">
               <AiOutlineInfoCircle />
-              {store.crtfc_gbn_nm ?? "미지정"}
+              {store.storeType ?? "미지정"}
             </div>
             <div className="flex mt-2 gap-2 items-center">
               <AiOutlineCheck />
-              {store.bizcnd_code_nm ?? "미지정"}
+              {store.category ?? "미지정"}
             </div>
           </div>
           <button
